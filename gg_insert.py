@@ -1,16 +1,5 @@
 from typing import List, Optional
-# Python3 program to construct tree using
-# inorder and postorder traversals
-
-# Helper function that allocates
-# a new node
-class Node:
-    def __init__(self, data:int):
-        self.data = data
-        self.left: Optional[Node] = None
-        self.right: Optional[Node] = None
-    def __repr__(self):
-        return  str(self.data)
+from tree import *
 # Recursive function to construct binary
 # of size n from Inorder traversal in[]
 # and Postorder traversal post[]. Initial
@@ -27,7 +16,7 @@ def build_node(desc: str, inorder_list: List[int], postorder_list: List[int], in
     print(f"{desc}: post    s={inorder_start} e:{inoder_end} {postorder_list[0:root_node_index[0]+1]}")
     # Pick current node from Postorder traversal
     # using postIndex and decrement postIndex
-    node = Node(postorder_list[root_node_index[0]])
+    node = TreeNode(postorder_list[root_node_index[0]])
 
     print(f"root [{root_node_index[0]}] = node: {node}")
     root_node_index[0] -= 1
@@ -61,13 +50,6 @@ def search(arr, strt, end, value):
     for i in range(strt, end + 1):
         if (arr[i] == value): break
     return i
-
-def preOrder(node):
-    if node == None:
-        return
-    print(node.data,end=" ")
-    preOrder(node.left)
-    preOrder(node.right)
 
 # Driver code
 if __name__ == '__main__':

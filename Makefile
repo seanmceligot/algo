@@ -1,6 +1,15 @@
 C         = gcc
 ASAN_FLAGS = -fsanitize=address -fno-omit-frame-pointer -Wno-format-security
 CFLAGS    := -Wall -Werror --std=gnu99 -ggdb $(ASAN_FLAGS)
+
+run_divide: divide
+	pahole divide
+	time ./divide | tee divide.log 
+.dummy: .py
+	python $<
+btr_lca:
+	python btr_lca.py
+
 my:
 	python my_build.py
 

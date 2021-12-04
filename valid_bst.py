@@ -6,6 +6,7 @@ def is_valid(root: Optional[TreeNode], lowest: int, highest:int) -> bool:
         return True
     val = root.val
     if val <= lowest:
+      print(f"invalid: val: {val} <= lowest: {lowest}")
       return False
     if val >= highest:
       return False  
@@ -31,8 +32,8 @@ def is_valid(root: Optional[TreeNode], lowest: int, highest:int) -> bool:
     return True
 if __name__ == '__main__':
     root = build_tree_breadth_first([5,4,6,None,None,3,7])
-    #drawtree(root)
     if root:
-        llim = int(math.pow(-2, 31))
-        ulim = int(math.pow(2, 31))
+        llim = -2** 31
+        ulim = 2**31
         print(is_valid(root, llim, ulim))
+        drawtree(root)

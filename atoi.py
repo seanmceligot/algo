@@ -1,6 +1,5 @@
 from typing import  List
 import math
-
 def parse_decimal(decimal: str) -> float:
     number: float = 0.0
     #add decimal .1 = 1*10^-1, .01=1*10^-2
@@ -9,8 +8,8 @@ def parse_decimal(decimal: str) -> float:
         power:int = -1
         for ch in decimal:
             n:int = int(ch)
-            print(f"{n} * 10^{power} ( {math.pow(10,power)} )")
-            add:float = n*math.pow(10,power)
+            print(f"{n} * 10^{power} ( {10**power} )")
+            add:float = n*10**power
             #print(f"add {type(n)} {type(add)} {type(number)}")
             number = number + add
             power-=1
@@ -22,8 +21,8 @@ def parse_integer(integer:str) -> int:
     power:int = len(integer)-1
     for ch in integer:
         n:int = int(ch)
-        print(f"{n} * 10^{power} ( {math.pow(10,power)} )")
-        add:int = n*int(math.pow(10,power))
+        print(f"{n} * 10^{power} ( {10**power} )")
+        add:int = n*int(10**power)
         #print(f"add {type(n)} {type(add)} {type(number)}")
         number = number + add
         power-=1
@@ -100,8 +99,8 @@ class Solution:
         number = number + parse_integer(integer)
         number = number + parse_decimal(decimal)
         number *= pos_neg
-        top = int(math.pow(2, 31))-1
-        bottom = int(math.pow(-2, 31))
+        top = int(2** 31)-1
+        bottom = int(-2** 31)
         number = min(number, top)
         number = max(number, bottom)
         print(f"result: {number}")

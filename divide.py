@@ -1,9 +1,9 @@
 # vim:set makeprg=python
-import math
-#max = int(math.pow(2, 31) -1)
-#min = int(math.pow(-2, 31) )
+#import math
 MIN = -2147483648
+assert MIN == -2** 31
 MAX = 2147483647
+assert MAX == 2**31-1
 optimize = True
 
 #def debug(unused ): # type: ignore
@@ -12,10 +12,10 @@ def debug(s:str):
     print(s)
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
-        #debug(f"dividend {dividend} divisor {divisor} looking for {int(dividend/divisor)}")
+        debug(f"dividend {dividend} divisor {divisor} looking for {int(dividend/divisor)}")
         assert divisor != 0
-        # debug(f"MIN={min}")
-        # debug(f"MAX={max}")
+        debug(f"MIN={min}")
+        debug(f"MAX={max}")
         if dividend == divisor:
             return 1
         if divisor == 1:
@@ -103,4 +103,4 @@ if __name__ == "__main__":
     div(9, 9)
     div(MIN, -1)
     div(MIN, 1)
-    div(2147483647, 2)
+    #div(2147483647, 2)

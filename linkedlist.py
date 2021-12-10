@@ -31,3 +31,19 @@ def linked_list_from_array(ar: List[int]) -> ListNode:
             cur.next = ListNode()
             cur = cur.next
     return head
+
+def int_to_linked_list(n: int) -> ListNode:
+    head = ListNode()
+    cur = head
+    import pdb;pdb.set_trace()
+    while n > 0:
+        cur.val = n%10
+        oldn = n
+        n = int(n/10)
+        assert n*10==oldn
+        if n > 0:
+            cur.next = ListNode()
+            cur = cur.next
+    return head
+            
+

@@ -1,14 +1,19 @@
 C         = gcc
 ASAN_FLAGS = -fsanitize=address -fno-omit-frame-pointer -Wno-format-security
 CFLAGS    := -Wall -Werror --std=gnu99 -ggdb $(ASAN_FLAGS)
-
-run_memory: memory
-	pahole memory
-	time ./memory | tee memory.log 
+run_divide2: divide2
+	pahole divide2
+	size divide2
+	bash -c "time ./divide2"
 
 run_divide: divide
 	pahole divide
-	time ./divide | tee divide.log 
+	size divide
+	bash -c "time ./divide"
+run_memory: memory
+	pahole memory
+	bash -c "time ./memory"
+
 .dummy: .py
 	python $<
 btr_lca:
@@ -28,19 +33,19 @@ b:
 
 run_postorder: postorder
 	pahole postorder
-	time ./postorder | tee postorder.log 
+	time ./postorder
 
 run_inorder: inorder
 	pahole inorder
-	time ./inorder | tee inorder.log 
+	time ./inorder
 
 run_merge2: merge2
-	./merge2 | tee merge2.log 
+	./merge2
 	
 merge2:
 
 m: mergesort
-	./mergesort | tee mergesort.log
+	./mergesort
 	
 mergesort:
 

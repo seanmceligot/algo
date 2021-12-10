@@ -1,5 +1,6 @@
 from typing import  List
 import math
+
 def parse_decimal(decimal: str) -> float:
     number: float = 0.0
     #add decimal .1 = 1*10^-1, .01=1*10^-2
@@ -40,7 +41,7 @@ def ignore_leading(s:str, index: int, size: int, chars: List[str]) -> int:
 class Solution:
     def myAtoi(self, s:str) -> int:
         print(f"atoi: {s}")
-        pos_neg = 1
+        pos_neg_multiplier = 1
         index = 0
         size: int = len(s)
         
@@ -55,9 +56,9 @@ class Solution:
         ch = s[index]
         if ch in ['+', '-']: 
             if ch == '+':
-               pos_neg = 1
+               pos_neg_multiplier = 1
             if ch == '-':
-               pos_neg = -1 
+               pos_neg_multiplier = -1 
             index += 1
             if index>=size:
                 return 0
@@ -98,7 +99,7 @@ class Solution:
         number:float= 0 
         number = number + parse_integer(integer)
         number = number + parse_decimal(decimal)
-        number *= pos_neg
+        number *= pos_neg_multiplier
         top = int(2** 31)-1
         bottom = int(-2** 31)
         number = min(number, top)

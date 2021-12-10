@@ -1,56 +1,60 @@
 from linkedlist import *
+from typing import Optional
 
-def int_to_linked_list(n: int) -> ListNode:
-    head = ListNode()
-    cur = head
-    import pdb;pdb.set_trace()
-    while n > 0:
-        cur.val = n%10
-        n = int(n/10)
-        if n > 0:
-            cur.next = ListNode()
-            cur = cur.next
-    return head
-            
 
-def add(l1: ListNode, l2: ListNode) -> int:
-   cur1  = l1
-   cur2 = l2
-   total = 0
-   power = 0
-   while not (cur1 is None and cur2 is None):
-       v1 = cur1.val if cur1 is not None else 0
-       v2 = cur2.val if cur2 is not None else 0
-       sum = v1*10**power + v2*10**power
-       print(f"{v1}*10**{power}+{v2}*10**{power}= {sum}")
-       total+=sum
-       power+=1
-       cur1 = cur1.next if cur1 else None
-       cur2 = cur2.next if cur2 else None
-   return total 
+def add(l1: Optional[ListNode], l2: Optional[ListNode], l3: ListNode):
+    next1 = l1
+    next2 = l2
+    power = 0
+    if next1 is not None or next2 is not None:
+        v1 = next1.val if next1 is not None else 0
+        v2 = next2.val if next2 is not None else 0
+        sum = v1*10**power + v2*10**power + l3.val
+        #print(f"{v1}*10**{power}+{v2}*10**{power}={sum}")
+        carry = 0
+        #print(f"{sum} > 10?")
+        if sum >= 10:
+            sum, carry = (sum % 10),  int(sum/10) 
+            #print(f"sum: {sum} carry: {carry}")
+        power += 1
+        l3.val = sum
+        #print(f"l3 {l3.val}")
+        next1 = next1.next if next1 else None
+        next2 = next2.next if next2 else None
+        if next1 or next2 or carry > 0:
+            l3.next = ListNode(carry)
+            #print(f"l3.next {carry}")
+            add(next1, next2, l3.next)
+
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         assert l1 is not None
         assert l2 is not None
-        total = add(l1, l2)
-        print("total", total)
-        result:ListNode = int_to_linked_list(total)
-        return result
-
+        l3 = ListNode()
+        add(l1, l2, l3)
+        return l3
+    def debug_add(self, l1: Optional[ListNode], l2: Optional[ListNode], expected) -> Optional[ListNode]:
+        print("l1", linked_list_to_array(l1))
+        print("l2", linked_list_to_array(l2))
+        result = solution.addTwoNumbers(l1, l2)
+        ar_result = linked_list_to_array(result)
+        assert ar_result == expected
+        print("result", ar_result)
 
 solution = Solution()
-
 if __name__ == "__main__":
-    l1 = linked_list_from_array([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
-    l2 = linked_list_from_array([5, 6, 4])
-    print("l1", linked_list_to_array(l1))
-    print("l2", linked_list_to_array(l2))
-    result = solution.addTwoNumbers(l1, l2)
-    ar_result = linked_list_to_array(result)
-    print("result", ar_result)
-    assert ar_result == [6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+    #l1 = linked_list_from_array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
+    #l2 = linked_list_from_array([5, 6, 4])
+    #solution.debug_add( l1, l2, [6, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
 
+    #l1 = linked_list_from_array([2, 4, 3])
+    #l2 = linked_list_from_array([5, 6, 4])
+    #solution.debug_add( l1, l2, [7, 0, 8])
+
+    l1 = linked_list_from_array([9,9,9,9,9,9,9])
+    l2 = linked_list_from_array([9,9,9,9])
+    solution.debug_add( l1, l2, [8,9,9,9,0,0,0,1])
     # n1 = 2*10**0  + 4*10**1 + 3*10**2
     # n2 = 5*10**0  + 6*10**1 + 4*10**2
     # digit1 =2*10**0+ 5*10**0

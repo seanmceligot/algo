@@ -10,8 +10,8 @@ def main():
         for y in range(b,d+1):
             count = alive_by_year.get(y, 0)
             alive_by_year[y] = count + 1
-    print(alive_by_year)
-    j
+            print(alive_by_year[y])
+    
 
 if __name__ == "__main__":
     main();

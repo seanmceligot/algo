@@ -7,15 +7,15 @@ class TreeNode:
         self.right = right
 def build(node: Optional[TreeNode], inorder: List[int], int index) -> Optional[TreeNode]:
     left=right=parent=None
-    if index < len(inorder)
+    if index < len(inorder):
         left = TreeNode(inorder[index]);
         index+=1
     else:
         return node
-    if index < len(inorder)
+    if index < len(inorder):
         parent = TreeNode(inorder[index]);
         index+=1
-    if index < len(inorder)
+    if index < len(inorder):
         right = TreeNode(inorder[index]);
         index+=1
     if parent is not None:

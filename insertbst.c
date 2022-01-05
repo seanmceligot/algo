@@ -16,14 +16,15 @@ struct TreeNode* insertIntoBST(struct TreeNode* root, int val){
     struct TreeNode* cur = root;
     while(cur) {
         if (cur->val == newnode->val) {
+            // already found, not duplicates
             return root;
         }
         if (newnode->val < cur->val) {
             if (cur->left == NULL) {
-                cur->left = newnode;
+                cur->left = newnode;  // insert to the left
                 return root;
             } else {
-                cur = cur->left;
+                cur = cur->left; // continue to the left
             }
         } else if (newnode->val > cur->val) {
             if (cur->right == NULL) {

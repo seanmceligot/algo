@@ -18,3 +18,4 @@ if __name__ == "__main__":
     ar = [1,2,3]
     print(reverse(ar))
 
+

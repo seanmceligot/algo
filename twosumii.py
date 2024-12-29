@@ -28,7 +28,5 @@ solution = Solution()
 if __name__ == "__main__":
     print(solution.twoSum([5,25,75], 100))
     print(f"o_n {o_n} o_count {o_count} {o_count/o_n}")
-      #for i2 in range(len(numbers)-1):
-      
         
       

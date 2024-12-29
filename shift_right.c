@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 void printa(const char* label, int* arr, int N) {
-	printf(label);
-	printf(": ");
+	puts(label);
+	puts(": ");
 	for (int i =0; i < N; i++) {
 		printf("%d, ", arr[i]);
 	}
-	printf("\n");
+	puts("\n");
 }
 void duplicateZeros(int* arr, int arrSize) {    
 		printf("arrSize %d\n", arrSize);
@@ -21,10 +21,11 @@ void duplicateZeros(int* arr, int arrSize) {
         }
     }
 }
-void main() {
+int main() {
 	int arr[]  = {1,0,2,3,0,4,5,0};
   unsigned int N=sizeof(arr)/sizeof(int);
 	printa("start", arr, N);
 	duplicateZeros(arr,N );
 	printa("done", arr, N);
+  return 0;
 }

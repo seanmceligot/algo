@@ -135,6 +135,28 @@ def drawtree(root: Optional[TreeNode]):
     except:
         pass
 
+def print_tree2(root):
+    if not root:
+        print("Empty Tree")
+        return
+
+    levels = []
+    queue = deque([(root, 0)])
+
+    while queue:
+        node, level = queue.popleft()
+        if len(levels) <= level:
+            levels.append([])
+        if node:
+            levels[level].append(node.val)
+            queue.append((node.left, level + 1))
+            queue.append((node.right, level + 1))
+        else:
+            levels[level].append(None)
+
+    for i, level in enumerate(levels):
+        print("Level", i, ":", level)
+
 def print_tree(root: TreeNode):
     # depth 1 : center screen_with/2 
     # dpeth 2 : center screen_with/4 spaces
@@ -161,7 +183,9 @@ def print_tree(root: TreeNode):
 if __name__ == '__main__':
     #drawtree(build_tree_breadth_first([1,2,3,null,null,4,null,null,5]))
     #drawtree(build_tree_breadth_first([2,1,3,0,7,9,1,2,null,1,0,null,null,8,8,null,null,null,null,7]))
-    root = build_tree_breadth_first( [3,5,1,6,2,0,8,-1,-1,7,4])
-    drawtree(root)
+    #jroot = build_tree_breadth_first( [3,5,1,6,2,0,8,-1,-1,7,4])
+    root = build_tree_breadth_first( [1,2,3,None,4,None,5] )
+
+    #drawtree(root)
     if root:
-        print_tree(root) 
+        print_tree2(root) 

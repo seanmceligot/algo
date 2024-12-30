@@ -6,10 +6,10 @@ def breadth_first_to_list(root: Optional[TreeNode]) -> List[List[int]]:
     values = list()
     if root is not None:
         queue = deque()
-        queue.append((0,root))
+        queue.append((0,root)) # [root]
         count = 0
         while len(queue) > 0:
-            level, cur = queue.popleft()
+            level, cur = queue.popleft()  ## fifo retrieve starting from root and then the next added element
             #print(f"level {level} cur.popleft {node.val} l:{node.left} r:{node.right}\n")
             if len(values) > level:
                 values[level].append(cur.val)

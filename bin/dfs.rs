@@ -21,6 +21,7 @@ fn main() {
         .with_span_events(FmtSpan::CLOSE)
         .with_timer(tracing_subscriber::fmt::time::uptime())
         .init();
+    // Depth first means go deep before doing wide
     // Construct the tree:
     //       1
     //      / \

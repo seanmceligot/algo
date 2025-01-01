@@ -188,4 +188,4 @@ if __name__ == '__main__':
 
     #drawtree(root)
     if root:
-        print_tree2(root) 
+        print_tree(root) 

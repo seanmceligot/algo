@@ -24,12 +24,12 @@ def build(node: Optional[TreeNode], inorder: List[int], int index) -> Optional[T
     if node is None:
         node = TreeNode
     n
-        
-    
+
+
     if node:
     else:
-        
-    
+
+
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        build(None, inorder, 0 )    
+        build(None, inorder, 0 )

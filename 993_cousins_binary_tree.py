@@ -21,11 +21,12 @@ from collections import deque
 from tree import TreeNode, build_tree_breadth_first, print_tree, print_tree2
 from typing import Optional, Deque, Tuple
 
+
 class Solution:
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
         if root is None:
             return False
-        xy = [x,y]
+        xy = [x, y]
         print(xy)
         if root.left and root.left.val in xy:
             return False
@@ -41,7 +42,9 @@ class Solution:
             size = len(q)
             for _ in range(size):
                 (node, parent) = q.popleft()
-                print(f"node {node.val} depth {depth} parent {parent} size {size} q {q}")
+                print(
+                    f"node {node.val} depth {depth} parent {parent} size {size} q {q}"
+                )
                 # the are childen so not cousins
                 if node.val == y:
                     ydepth = depth
@@ -50,21 +53,24 @@ class Solution:
                     xdepth = depth
                     xparent = parent
                 if node.left:
-                    q.append( (node.left, node))
+                    q.append((node.left, node))
                 if node.right:
-                    q.append( (node.right, node))
-                print(f"node {node.val} depth {depth}  parent {parent} xdepth {xdepth} ydepth {ydepth}")
+                    q.append((node.right, node))
+                print(
+                    f"node {node.val} depth {depth}  parent {parent} xdepth {xdepth} ydepth {ydepth}"
+                )
                 if xdepth and ydepth:
                     # with different parents (TEST 2).
                     if xparent == yparent:
                         return False
                     # if they have the same (TEST 1) depth
                     return xdepth == ydepth
-            depth+=1
+            depth += 1
         return False
 
+
 if __name__ == "__main__":
-    root = build_tree_breadth_first( [1,2,3,None,4,None,5] )
+    root = build_tree_breadth_first([1, 2, 3, None, 4, None, 5])
     #     1
     #   2   3
     #  x 4   x 5
@@ -73,6 +79,6 @@ if __name__ == "__main__":
 
     print_tree(root)
     print("")
-    #import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     print(Solution().isCousins(root, 4, 5))
     print_tree2(root)

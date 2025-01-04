@@ -2,6 +2,7 @@ import time
 import os
 import sys
 import mmap
+
 d = 1000
 
 print(f"variable address {id(d):x}")
@@ -13,6 +14,3 @@ with open("Makefile", "r+b") as f:
     time.sleep(1)
     with open(f"/proc/{os.getpid()}/maps", "r") as f:
         print(f.read())
-
-
-

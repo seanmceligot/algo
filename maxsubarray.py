@@ -6,7 +6,7 @@ def sum(nums: List[int]):
     count = 0
     for n in nums:
         count += n
-    #print(f"sum {nums} = {count}")
+    # print(f"sum {nums} = {count}")
     return count
 
 
@@ -17,15 +17,16 @@ class Solution:
         checked = [max_subarray]
         for num in nums[1:]:
             checked += [num]
-            #print(f"{checked}\tc=max n:{num} n:{num}+c:{current_subarray}=n:{num+current_subarray}")
+            # print(f"{checked}\tc=max n:{num} n:{num}+c:{current_subarray}=n:{num+current_subarray}")
 
-            tmpmax = max(num, current_subarray+num)
-            #print(f"{checked}\tc=max n:{num} n:{num}+{current_subarray} = {tmpmax}")
+            tmpmax = max(num, current_subarray + num)
+            # print(f"{checked}\tc=max n:{num} n:{num}+{current_subarray} = {tmpmax}")
             current_subarray = tmpmax
 
             tmpmmax = max(max_subarray, current_subarray)
             print(
-                f"{checked}\tm=max c:{current_subarray}\tm:{max_subarray} = {tmpmmax}")
+                f"{checked}\tm=max c:{current_subarray}\tm:{max_subarray} = {tmpmmax}"
+            )
             max_subarray = tmpmmax
         return max_subarray
 

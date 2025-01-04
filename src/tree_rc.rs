@@ -47,8 +47,8 @@ Traversal Order:
 
 The array is filled level by level, from left to right.
 */
-pub fn build_tree_breadth_first(input_list: &Vec<Option<i32>>) -> Option<Rc<RefCell<TreeNode>>> {
-    if input_list.len() < 1 {
+pub fn build_tree_breadth_first(input_list: &[Option<i32>]) -> Option<Rc<RefCell<TreeNode>>> {
+    if input_list.is_empty() {
         return None;
     }
     //        CREATE queue (empty)
@@ -73,36 +73,32 @@ pub fn build_tree_breadth_first(input_list: &Vec<Option<i32>>) -> Option<Rc<RefC
         //      IF current_node IS NOT null:
         if let Some(current_node) = mb_current_node {
             // left
-            if i < len {
-                if input_list[i].is_some() {
-                    // SET current_node.left = nodes_list[i]
-                    let left = Rc::new(RefCell::new(TreeNode::new(
-                        input_list[i].unwrap(),
-                        None,
-                        None,
-                    )));
-                    current_node.borrow_mut().left = Some(Rc::clone(&left));
-                    //  ADD nodes_list[i] TO queue
-                    queue.push_front(Some(left));
-                    // INCREMENT i
-                    i = i + 1;
-                }
+            if i < len && input_list[i].is_some() {
+                // SET current_node.left = nodes_list[i]
+                let left = Rc::new(RefCell::new(TreeNode::new(
+                    input_list[i].unwrap(),
+                    None,
+                    None,
+                )));
+                current_node.borrow_mut().left = Some(Rc::clone(&left));
+                //  ADD nodes_list[i] TO queue
+                queue.push_front(Some(left));
+                // INCREMENT i
+                i += 1;
             }
             // right
-            if i < len {
-                if input_list[i].is_some() {
-                    // SET current_node.right = nodes_list[i]
-                    let right = Rc::new(RefCell::new(TreeNode::new(
-                        input_list[i].unwrap(),
-                        None,
-                        None,
-                    )));
-                    current_node.borrow_mut().right = Some(Rc::clone(&right));
-                    //  ADD nodes_list[i] TO queue
-                    queue.push_front(Some(right));
-                    // INCREMENT i
-                    i = i + 1;
-                }
+            if i < len && input_list[i].is_some() {
+                // SET current_node.right = nodes_list[i]
+                let right = Rc::new(RefCell::new(TreeNode::new(
+                    input_list[i].unwrap(),
+                    None,
+                    None,
+                )));
+                current_node.borrow_mut().right = Some(Rc::clone(&right));
+                //  ADD nodes_list[i] TO queue
+                queue.push_front(Some(right));
+                // INCREMENT i
+                i += 1;
             }
         }
     }
@@ -118,7 +114,7 @@ pub fn print_tree(head: &Option<Rc<RefCell<TreeNode>>>) {
     let mut lifo_stack: Vec<Option<Rc<RefCell<TreeNode>>>> = Vec::new();
 
     //event!(Level::DEBUG, "before push stack {}", stack.len());
-    if let Some(_) = head {
+    if head.is_some() {
         lifo_stack.push(head.clone());
         //event!(Level::DEBUG, "after push stack {}", stack.len());
         while let Some(mb_current) = lifo_stack.pop() {

@@ -1,0 +1,10 @@
+*.lock
+*.bak
+*.gz
+leetcode-tree-visualizer/
+__pycache__
+target
+memory
+divide
+divide2
+*.tar

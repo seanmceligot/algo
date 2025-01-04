@@ -1,6 +1,6 @@
 // leetcode Remove Duplicates from Sorted Tree
 
-use leekcode::tree::{print_tree, TreeNode};
+use leekcode::tree_box::{print_tree, TreeNode};
 use tracing_subscriber::fmt::format::FmtSpan;
 
 // cargo run --bin remove_from_sorted

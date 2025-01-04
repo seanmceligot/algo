@@ -54,11 +54,13 @@ g: shift_right
 	
 shift_right:
 
-rs_all: rs_dfs rs_ll rs_sc
 rs_dfs:
 	cargo run --bin dfs
-rs_ll:
+remove_from_sorted:
 	cargo run --bin remove_from_sorted
-
+rs_scan:
+	cargo run --bin scan
 rs_sc:
 	cargo run --bin scan
+rs_993:
+	cargo run --bin 993

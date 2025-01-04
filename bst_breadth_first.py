@@ -3,9 +3,9 @@ from collections import deque
 from tree import *
 
 def breadth_first_to_list(root: Optional[TreeNode]) -> List[List[int]]:
-    values = list()
+    values: List[List[int]]= list()
     if root is not None:
-        queue = deque()
+        queue : Deque[Tuple[int,TreeNode]] = deque()
         queue.append((0,root)) # [root]
         count = 0
         while len(queue) > 0:
@@ -21,7 +21,7 @@ def breadth_first_to_list(root: Optional[TreeNode]) -> List[List[int]]:
             if cur.right is not None:
                 queue.append((level+1, cur.right))
             count += 1
-    return values 
+    return values
 
 
 if __name__ == "__main__":

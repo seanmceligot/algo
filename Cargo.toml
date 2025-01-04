@@ -20,6 +20,9 @@ path = "bin/scan.rs"
 name = "dfs"
 path = "bin/dfs.rs"
 
+[[bin]]
+name = "993"
+path = "bin/993.rs"
 [dependencies]
 tracing = "0.1.41"
 tracing-subscriber = "0.3.19"

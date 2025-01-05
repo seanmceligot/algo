@@ -40,6 +40,7 @@ class Solution:
         yparent: Optional[TreeNode] = None
         while q:
             size = len(q)
+            # go through the current queue
             for _ in range(size):
                 (node, parent) = q.popleft()
                 print(
@@ -71,9 +72,15 @@ class Solution:
 
 if __name__ == "__main__":
     root = build_tree_breadth_first([1, 2, 3, None, 4, None, 5])
-    #     1
-    #   2   3
-    #  x 4   x 5
+    #       1
+    #     /  \
+    #    2     3
+    #   /\   /  \
+    #  x   4 x   5
+    # print width is 12
+    # tree width is 4
+    # tree height is 3
+    # print height is 5
     if not root:
         raise Exception("build_tree_breadth_first failed")
 

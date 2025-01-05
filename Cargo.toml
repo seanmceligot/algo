@@ -22,7 +22,7 @@ path = "bin/dfs.rs"
 
 [[bin]]
 name = "993"
-path = "bin/993.rs"
+path = "bin/993_cousins_tree.rs"
 [dependencies]
 tracing = "0.1.41"
 tracing-subscriber = "0.3.19"

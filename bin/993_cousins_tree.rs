@@ -10,10 +10,11 @@ pub struct Solution {}
 //  Two nodes of a binary tree are cousins
 //  if they have the same (TEST 1) depth
 //  with different parents (TEST 2).
+type MaybeTreeNode = Option<Rc<RefCell<TreeNode>>>;
 
 //  Note that in a binary tree, the root node is at the depth 0, and children of each depth k node are at the depth k + 1.
 impl Solution {
-    pub fn is_cousins(mb_root: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32) -> bool {
+    pub fn is_cousins(root: Option<Rc<RefCell<TreeNode>>>, x: i32, y: i32) -> bool {
         //  (starting point) Given the root of
         //  PREREQ: a binary tree
         //  PREREQ: with unique values
@@ -23,13 +24,13 @@ impl Solution {
         //          false if children.
         //          false they are found not to be cousins.
         //          false if tree ends before found.
-        if mb_root.is_none() {
+        if root.is_none() {
             println!("mb_root is none");
             // false if tree ends before found.
             // no cousins are possible with no children
             return false;
         }
-        let root = mb_root.unwrap();
+        let root = root.unwrap();
         let mut xy = HashSet::new();
         xy.insert(x);
         xy.insert(y);
@@ -54,41 +55,62 @@ impl Solution {
                 return false;
             }
         }
-        let mut q = VecDeque::new();
+        let mut q: VecDeque<(MaybeTreeNode, MaybeTreeNode)> = VecDeque::new();
         q.push_back((Some(Rc::clone(&root)), None));
         let mut depth = 0;
         let mut ydepth = None;
         let mut xdepth = None;
-        let mut xparent = None;
-        let mut yparent = None;
+        let mut xparent: MaybeTreeNode = None;
+        let mut yparent: MaybeTreeNode = None;
 
-        while q.len() > 0 {
+        while !q.is_empty() {
             let size = q.len();
             println!("depth={} size={} ", depth, size);
             for _ in 0..size {
+                
                 let (node, parent) = q.pop_front().unwrap();
+                // if node is not None
                 if let Some(n) = node {
                     if n.borrow().val == x {
+                        // found x
                         xdepth = Some(depth);
-                        let f = Rc::clone(&n);
-                        xparent = Some(f);
-                    }
-                    if n.borrow().val == y {
+                        if let Some(p) = parent {
+                            // save x parent to check later if x and y are cousins
+                            xparent = Some(Rc::clone(&p));
+                        }
+                    } else if n.borrow().val == y {
                         ydepth = Some(depth);
-                        yparent = parent;
+                        if let Some(p) = parent {
+                            // save y parent to check later if x and y are cousins
+                            yparent = Some(Rc::clone(&p));
+                        }
                     }
                     if let Some(left) = &n.borrow().left {
-                        q.push_back((Some(Rc::clone(left)), Some(Rc::clone(&n))));
+                        // if current node has a left child, add it to the queue
+                        let left_node = Some(Rc::clone(left));
+                        let parent_node = Some(Rc::clone(&n));
+                        q.push_back(
+                            ( left_node, parent_node));
                     }
                     if let Some(right) = &n.borrow().right {
-                        q.push_back((Some(Rc::clone(right)), Some(Rc::clone(&n))));
+                        // if current node has a right child, add it to the queue
+                        let right_node = Some(Rc::clone(right));
+                        let parent_node = Some(Rc::clone(&n));
+                        q.push_back(
+                            ( right_node, parent_node));
                     }
                 }
                 if xdepth.is_some() && ydepth.is_some() {
-                    if xdepth == ydepth && xparent != yparent {
+                    // we found both x and y
+                    let same_depth = xdepth == ydepth;
+                    let diff_parent = xparent != yparent;
+                    if same_depth & diff_parent {
+                        // x and y are cousins (same depth, different parent)
                         println!("xdepth={} ydepth={} xparent={} yparent={}", xdepth.unwrap(), ydepth.unwrap(), xparent.unwrap().borrow().val, yparent.unwrap().borrow().val);
                         return true;
                     }
+                    // x and y are not cousins
+                    return false;
                 }
             }
             depth += 1;
@@ -130,7 +152,23 @@ fn main() {
     // should be true with 4, 5
     let result = Solution::is_cousins(root, 4, 5);
     println!("result={}", result);
-    assert_eq!(result, true);
+ 
+    //[1,2,3,null,null,4,5]
+    // with 4, 5
+    //       1
+    //      / \
+    //     2   3
+    //        / \
+    //       4   5 
+    let t5 = Some(Rc::new(RefCell::new(TreeNode::new(5, None, None))));
+    let t4 = Some(Rc::new(RefCell::new(TreeNode::new(4, None, None))));
+    let t3 = Some(Rc::new(RefCell::new(TreeNode::new(3, t4, t5))));
+    let t2 = Some(Rc::new(RefCell::new(TreeNode::new(2, None, None))));
+    let root = Some(Rc::new(RefCell::new(TreeNode::new(1, t2, t3))));
+    let result = Solution::is_cousins(root, 4, 5);
+    println!("result={}", result);
+    //should be false becuase 4 and 5 are children, not cousins
+    assert_eq!(result, false);
 }
 #[cfg(test)]
 mod tests {

@@ -34,7 +34,6 @@ impl Solution {
         let mut xy = HashSet::new();
         xy.insert(x);
         xy.insert(y);
-        print_tree(&Some(Rc::clone(&root)));
         println!("node val={}", root.borrow().val);
         println!("left is some={}", root.borrow().left.is_some());
         println!("right is some={}", root.borrow().right.is_some());
@@ -170,6 +169,7 @@ fn main() {
     //should be false becuase 4 and 5 are children, not cousins
     assert_eq!(result, false);
 }
+
 #[cfg(test)]
 mod tests {
     //use super::*;

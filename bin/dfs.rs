@@ -1,26 +1,27 @@
 // leetcode Remove Duplicates from Sorted Tree
 
-use leekcode::tree_box::{print_tree, TreeNode};
-use tracing_subscriber::fmt::format::FmtSpan;
+use std::{cell::RefCell, clone, collections::VecDeque, rc::Rc};
 
-// cargo run --bin remove_from_sorted
+use leekcode::tree_rc::{TreeNode};
+
+type MaybeTreeNode = Option<Rc<RefCell<TreeNode>>>;
+
+// cargo run --bin dfs
 pub struct Solution {}
 impl Solution {
-    pub fn dfs(head: Option<Box<TreeNode>>) -> Option<Box<TreeNode>> {
-        print_tree(&head);
+  pub fn dfs(head: MaybeTreeNode) -> MaybeTreeNode {
+        if !head.is_some() {
+            return None;
+        }
+        let mut stack: VecDeque<MaybeTreeNode> = VecDeque::new();
+        stack.push_back(head.clone());
+
         head
     }
 }
 
 fn main() {
-    tracing_subscriber::fmt()
-        .with_ansi(true)
-        .with_max_level(tracing::Level::TRACE)
-        //.without_time()
-        .with_target(false)
-        .with_span_events(FmtSpan::CLOSE)
-        .with_timer(tracing_subscriber::fmt::time::uptime())
-        .init();
+ 
     // Depth first means go deep before doing wide
     // Construct the tree:
     //       1
@@ -28,11 +29,12 @@ fn main() {
     //     2   4
     //    /
     //   3
-    let t3 = Some(Box::new(TreeNode::new(3, None, None)));
-    let t2 = Some(Box::new(TreeNode::new(2, t3, None)));
-    let t4 = Some(Box::new(TreeNode::new(4, None, None)));
-    let t1 = Some(Box::new(TreeNode::new(1, t2, t4)));
-    Solution::dfs(t1);
+    let t5 = Some(Rc::new(RefCell::new(TreeNode::new(5, None, None))));
+    let t4 = Some(Rc::new(RefCell::new(TreeNode::new(4, None, None))));
+    let t3 = Some(Rc::new(RefCell::new(TreeNode::new(3, None, t5))));
+    let t2 = Some(Rc::new(RefCell::new(TreeNode::new(2, None, t4))));
+    let root = Some(Rc::new(RefCell::new(TreeNode::new(1, t2, t3))));
+    Solution::dfs(root);
 }
 #[cfg(test)]
 mod tests {

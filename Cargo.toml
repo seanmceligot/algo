@@ -23,6 +23,15 @@ path = "bin/dfs.rs"
 [[bin]]
 name = "993"
 path = "bin/993_cousins_tree.rs"
+
+[[bin]]
+name = "94"
+path = "bin/94_inorder.rs"
+
+[[bin]]
+name = "fac"
+path = "bin/factorial_tail_recusion.rs"
+
 [dependencies]
 tracing = "0.1.41"
 tracing-subscriber = "0.3.19"

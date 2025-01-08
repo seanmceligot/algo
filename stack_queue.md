@@ -22,12 +22,12 @@ import queue
 `list.append(item)`
 `list.pop(0)`
 
-### Rust VecDeque
+### Rust VecDeque queue
 ✅O(1)
 `vecdeque.push_back(item)`
 `vecdeque.pop_front()`
 
-### Rust Vec
+### Rust Vec queue
 ❌O(n)
 `vec.push(item)`
 `vec.remove(0)`
@@ -40,22 +40,22 @@ Push Method
 Pop Method
 
 ✅O(1)
-**Python (List)**
+**Python (List) stack**
 `list.append(item)`
 `list.pop()`
 
 ✅O(1)
-**Python (`deque`)**
+**Python (`deque`) stack **
 `deque.append(item)`
 `deque.pop()`
 
 ✅O(1)
-**Rust (`Vec`)**
+**Rust (`Vec`) stack **
 `vec.push(item)`
 `vec.pop()`
 
 ✅O(1)
-**Rust (`VecDeque`)**
+**Rust (`VecDeque`) stack **
 `vecdeque.push_back(item)`
 `vecdeque.pop_back()`
 

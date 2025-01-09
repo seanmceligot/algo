@@ -20,7 +20,6 @@ use leekcode::tree_rc::{build_tree_breadth_first, print_tree, TreeNode};
 use std::cell::RefCell;
 use std::collections::HashSet;
 use std::collections::VecDeque;
-use tracing_subscriber::fmt::format::FmtSpan;
 use std::rc::Rc;
 
 pub struct Solution {}

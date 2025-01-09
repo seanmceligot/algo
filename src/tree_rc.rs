@@ -22,6 +22,9 @@ impl TreeNode {
         Self { val, left, right }
     }
 }
+
+pub type MaybeTreeNode = Option<Rc<RefCell<TreeNode>>>;
+
 //#[inline]
 //fn edges(nodeCell<TreeNode>) -> [&Option<Rc<RefCell<TreeNode>>>; 2] {
 //    [&node.left, &node.right]

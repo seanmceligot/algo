@@ -120,7 +120,8 @@ The array is filled level by level, from left to right.
 def build_tree_breadth_first(ar: List[Optional[int]]) -> Optional[TreeNode]:
     if len(ar) < 1:
         return None
-    # convert list of int to list of nodes
+    # convert list of int to list of nodes 
+    # List[int] -> TreeNode[int]
     nodes = [None if val == None else TreeNode(val) for val in ar]
     ic("build_tree_breadth_first",nodes)
     kids = nodes[::-1]

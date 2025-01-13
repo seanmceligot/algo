@@ -1,5 +1,5 @@
 from typing import Optional, List
-from tree import *
+from tree import TreeNode, to_preorder, to_inorder, to_postorder
 
 
 def build_node(

@@ -1,6 +1,6 @@
 // leetcode Remove Duplicates from Sorted List
 
-use leekcode::linked_list::{build_list, list_to_vec, print_list, ListNode};
+use leetcode::linked_list::{build_list, list_to_vec, print_list, ListNode};
 
 // cargo run --bin remove_from_sorted
 pub struct Solution {}

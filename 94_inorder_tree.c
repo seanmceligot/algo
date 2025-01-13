@@ -85,8 +85,8 @@ int *inorderTraversal(struct TreeNode *root, int *returnSize)
   *returnSize = count;
   return list;
 }
-struct TreeNode *new_tree(int val)
-{
+
+struct TreeNode *new_tree(int val) {
   struct TreeNode *node = calloc(1, sizeof(struct TreeNode));
   node->val = val;
   return node;

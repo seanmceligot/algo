@@ -1,4 +1,4 @@
-use leekcode::tree_rc::{build_tree_breadth_first, print_tree, TreeNode};
+use leetcode::tree_rc::{from_leetcode, print_tree_stack, TreeNode};
 use std::cell::RefCell;
 use std::collections::HashSet;
 use std::collections::VecDeque;
@@ -141,13 +141,13 @@ fn main() {
     let root = Some(Rc::new(RefCell::new(TreeNode::new(1, t2, t3))));
     /*
     let input_list = vec![Some(1), Some(2), Some(3), None, Some(4), None, Some(5)];
-    let root = build_tree_breadth_first(&input_list);
+    let root = from_leetcode(&input_list);
     */
     // root value should be 1
     if let Some(r) = &root {
         println!("root={}", r.borrow().val);
     }
-    print_tree(&root);
+    print_tree_stack(&root);
     // should be true with 4, 5
     let result = Solution::is_cousins(root, 4, 5);
     println!("result={}", result);

@@ -18,8 +18,8 @@
 // }
 use leetcode::tree_rc::{from_leetcode, print_tree_stack, TreeNode};
 use std::cell::RefCell;
-use std::collections::HashSet;
-use std::collections::VecDeque;
+//use std::collections::HashSet;
+//use std::collections::VecDeque;
 use std::rc::Rc;
 
 pub struct Solution {}
@@ -50,7 +50,15 @@ impl Solution {
 }
 
 fn main() {
-    !todo!("Write the main function");
+    let t5 = Some(Rc::new(RefCell::new(TreeNode::new(5, None, None))));
+    let t4 = Some(Rc::new(RefCell::new(TreeNode::new(4, None, None))));
+    let t3 = Some(Rc::new(RefCell::new(TreeNode::new(3, None, t5))));
+    let t2 = Some(Rc::new(RefCell::new(TreeNode::new(2, None, t4))));
+    let root = Some(Rc::new(RefCell::new(TreeNode::new(1, t2, t3))));
+    print_tree_stack(&root);
+    let input_list = vec![Some(1), Some(2), Some(3), Some(4), Some(5), None, Some(8), None, None, Some(6), Some(7), Some(9)];
+    let root = from_leetcode(&input_list);
+    print_tree_stack(&root);
 }
 #[cfg(test)]
 mod tests {

@@ -54,8 +54,9 @@ g: shift_right
 	
 shift_right:
 
-rs_dfs:
-	cargo run --bin dfs
+rs_leetcode:
+	cargo run --bin leetcode
+
 remove_from_sorted:
 	cargo run --bin remove_from_sorted
 rs_scan:

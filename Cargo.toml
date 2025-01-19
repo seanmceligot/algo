@@ -17,8 +17,8 @@ name = "scan"
 path = "bin/scan.rs"
 
 [[bin]]
-name = "dfs"
-path = "bin/dfs.rs"
+name = "leetcode"
+path = "bin/leetcode.rs"
 
 [[bin]]
 name = "993"
